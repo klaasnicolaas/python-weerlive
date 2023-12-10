@@ -1,0 +1,1 @@
+Vraag eerst een API-key op, zie http: //weerlive.nl/delen.php
