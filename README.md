@@ -160,7 +160,7 @@ SOFTWARE.
 <!-- MARKDOWN LINKS & IMAGES -->
 [build-shield]: https://github.com/klaasnicolaas/python-weerlive/actions/workflows/tests.yaml/badge.svg
 [build-url]: https://github.com/klaasnicolaas/python-weerlive/actions/workflows/tests.yaml
-[codecov-shield]: https://codecov.io/gh/klaasnicolaas/python-weerlive/branch/main/graph/badge.svg?token=TOKEN
+[codecov-shield]: https://codecov.io/gh/klaasnicolaas/python-weerlive/branch/main/graph/badge.svg?token=3UTVTR785Y
 [codecov-url]: https://codecov.io/gh/klaasnicolaas/python-weerlive
 [commits-shield]: https://img.shields.io/github/commit-activity/y/klaasnicolaas/python-weerlive.svg
 [commits-url]: https://github.com/klaasnicolaas/python-weerlive/commits/main
