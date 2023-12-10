@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
 | Parameter | value Type | Description |
 | :-------- | :--------- | :---------- |
-| `api_key` | `str` | The API key to use for the connection. |
+| `api_key` | `str` | The API key to use for the connection (Request API key [here](https://weerlive.nl/delen.php)). |
 | `latitude` | `float` | The latitude of the location to retrieve the weather data for. |
 | `longitude` | `float` | The longitude of the location to retrieve the weather data for. |
 
@@ -170,7 +170,7 @@ SOFTWARE.
 [downloads-url]: https://pypistats.org/packages/weerlive
 [last-commit-shield]: https://img.shields.io/github/last-commit/klaasnicolaas/python-weerlive.svg
 [license-shield]: https://img.shields.io/github/license/klaasnicolaas/python-weerlive.svg
-[maintainability-shield]: https://api.codeclimate.com/v1/badges/TOKEN/maintainability
+[maintainability-shield]: https://api.codeclimate.com/v1/badges/dc7c4ef7ba9a00f11787/maintainability
 [maintainability-url]: https://codeclimate.com/github/klaasnicolaas/python-weerlive/maintainability
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
