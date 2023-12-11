@@ -100,6 +100,11 @@ class Weather(DataClassORJSONMixin):
         alarm_message: Message of the alarm.
     """
 
+    def __post_init__(self) -> None:
+        """Post init function."""
+        if self.alarm_message == "":
+            self.alarm_message = None
+
     # pylint: disable-next=too-few-public-methods
     class Config(BaseConfig):
         """Mashumaro configuration."""
@@ -166,8 +171,3 @@ class Weather(DataClassORJSONMixin):
     alarm_message: str | None = field(
         default=None, metadata=field_options(alias="alarmtxt")
     )
-
-    def __post_init__(self) -> None:
-        """Post init function."""
-        if self.alarm_message == "":
-            self.alarm_message = None

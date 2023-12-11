@@ -35,3 +35,33 @@ async def test_weather_data(
         weather: Weather = await client.weather()
         assert weather == snapshot
         assert weather.to_json() == snapshot
+        assert weather.alarm is False
+        assert weather.alarm_message is None
+
+
+async def test_weather_alarm_data(
+    aresponses: ResponsesMockServer,
+    snapshot: SnapshotAssertion,
+) -> None:
+    """Test weather data function."""
+    aresponses.add(
+        "weerlive.nl",
+        "/api/json-data-10min.php",
+        "GET",
+        aresponses.Response(
+            status=200,
+            headers={"Content-Type": "application/json"},
+            text=load_fixtures("weather_alarm.json"),
+        ),
+    )
+    async with ClientSession() as session:
+        client = Weerlive(
+            api_key="test",
+            longitude=66.6699498,
+            latitude=26.0317749,
+            session=session,
+        )
+        weather: Weather = await client.weather()
+        assert weather == snapshot
+        assert weather.to_json() == snapshot
+        assert weather.alarm is True
