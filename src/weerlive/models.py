@@ -10,6 +10,18 @@ from mashumaro.mixins.orjson import DataClassORJSONMixin
 from mashumaro.types import SerializationStrategy
 
 
+class IntegerIsBoolean(SerializationStrategy):
+    """Boolean serialization strategy for integers."""
+
+    def serialize(self, value: bool) -> int:  # noqa: FBT001
+        """Serialize a boolean to an integer."""
+        return int(value)
+
+    def deserialize(self, value: str) -> bool:
+        """Deserialize an integer to a boolean."""
+        return bool(int(value))
+
+
 class TimeStrategy(SerializationStrategy):
     """String serialization strategy to handle the time format."""
 
@@ -83,13 +95,21 @@ class Weather(DataClassORJSONMixin):
         d2_wind_ddg: Wind direction in degrees
         d2_rainfall: Change of rainfall in % for the day after tomorrow.
         d2_sun: Chance of sunshine in % for the day after tomorrow.
+
+        alarm_code: Boolean value indicating if there is an alarm.
+        alarm_message: Message of the alarm.
     """
+
+    def __post_init__(self) -> None:
+        """Post init function."""
+        if self.alarm_message == "":
+            self.alarm_message = None
 
     # pylint: disable-next=too-few-public-methods
     class Config(BaseConfig):
         """Mashumaro configuration."""
 
-        serialization_strategy = {time: TimeStrategy()}  # noqa: RUF012
+        serialization_strategy = {time: TimeStrategy(), bool: IntegerIsBoolean()}  # noqa: RUF012
         serialize_by_alias = True
 
     location: str = field(metadata=field_options(alias="plaats"))
@@ -146,3 +166,8 @@ class Weather(DataClassORJSONMixin):
     d2_wind_ddg: int = field(metadata=field_options(alias="d2windrgr"))
     d2_rainfall: int = field(metadata=field_options(alias="d2neerslag"))
     d2_sun: int = field(metadata=field_options(alias="d2zon"))
+
+    alarm: bool = field(metadata=field_options(alias="alarm"))
+    alarm_message: str | None = field(
+        default=None, metadata=field_options(alias="alarmtxt")
+    )
