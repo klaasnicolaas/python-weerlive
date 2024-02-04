@@ -120,8 +120,8 @@ addopts = "--cov"
 asyncio_mode = "auto"
 
 [tool.ruff]
-select = ["ALL"]
-ignore = [
+lint.select = ["ALL"]
+lint.ignore = [
   "ANN101",  # Self... explanatory
   "ANN102",  # cls... just as useless
   "ANN401",  # Opinioated warning on disallowing dynamically typed expressions
@@ -136,19 +136,19 @@ ignore = [
   "ISC001",
 ]
 
-[tool.ruff.flake8-pytest-style]
+[tool.ruff.lint.flake8-pytest-style]
 mark-parentheses = false
 fixture-parentheses = false
-
-[tool.ruff.isort]
-known-first-party = ["weerlive"]
 
 [tool.ruff.lint.flake8-type-checking]
 runtime-evaluated-base-classes = [
   "mashumaro.mixins.orjson.DataClassORJSONMixin",
 ]
 
-[tool.ruff.mccabe]
+[tool.ruff.lint.isort]
+known-first-party = ["weerlive"]
+
+[tool.ruff.lint.mccabe]
 max-complexity = 25
 
 [build-system]

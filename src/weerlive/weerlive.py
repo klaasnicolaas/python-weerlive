@@ -5,7 +5,7 @@ import asyncio
 import socket
 from dataclasses import dataclass
 from importlib import metadata
-from typing import Any, Mapping, Self, cast
+from typing import Any, Self, cast
 
 from aiohttp import ClientError, ClientSession
 from aiohttp.hdrs import METH_GET
@@ -37,8 +37,29 @@ class Weerlive:
         uri: str,
         *,
         method: str = METH_GET,
-        params: Mapping[str, Any] | None = None,
+        params: dict[str, Any] | None = None,
     ) -> Any:
+        """Handle a request to the Weerlive API.
+
+        Args:
+        ----
+            uri: Request URI, without '/api/', for example, 'status'.
+            method: HTTP method to use.
+            params: Extra options to improve or limit the response.
+
+        Returns:
+        -------
+            A Python dictionary (JSON decoded) with the response from
+            the Weerlive API.
+
+        Raises:
+        ------
+            WeerliveAuthenticationError: If the API key is invalid.
+            WeerliveConnectionError: An error occurred while communicating
+                with the Weerlive API.
+            WeerliveError: Received an unexpected response from the Weerlive API.
+
+        """
         version = metadata.version(__package__)
         url = URL.build(scheme="https", host="weerlive.nl", path="/api/").join(URL(uri))
 
@@ -98,6 +119,7 @@ class Weerlive:
         Returns
         -------
             A Weather data object from the API.
+
         """
         data = await self._request(
             "json-data-10min.php",
@@ -119,6 +141,7 @@ class Weerlive:
         Returns
         -------
             The Weerlive object.
+
         """
         return self
 
@@ -128,5 +151,6 @@ class Weerlive:
         Args:
         ----
             _exc_info: Exec type.
+
         """
         await self.close()
