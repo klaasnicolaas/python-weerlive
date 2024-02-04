@@ -98,6 +98,7 @@ class Weather(DataClassORJSONMixin):
 
         alarm_code: Boolean value indicating if there is an alarm.
         alarm_message: Message of the alarm.
+
     """
 
     def __post_init__(self) -> None:
