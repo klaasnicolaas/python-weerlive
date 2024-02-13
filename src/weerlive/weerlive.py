@@ -86,7 +86,7 @@ class Weerlive:
                     ssl=True,
                 )
                 response.raise_for_status()
-        except asyncio.TimeoutError as exception:
+        except TimeoutError as exception:
             msg = "Timeout occurred while connecting to the Weerlive API."
             raise WeerliveConnectionError(msg) from exception
         except (ClientError, socket.gaierror) as exception:
