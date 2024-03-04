@@ -1,4 +1,5 @@
 """Auth tests for Weerlive."""
+
 # pylint: disable=protected-access
 import pytest
 from aiohttp import ClientSession

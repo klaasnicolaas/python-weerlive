@@ -1,4 +1,5 @@
 """Test the models for Weerlive."""
+
 from __future__ import annotations
 
 from aiohttp import ClientSession
