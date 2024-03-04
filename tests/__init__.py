@@ -1,4 +1,5 @@
 """Asynchronous Python client for Weerlive."""
+
 from pathlib import Path
 
 

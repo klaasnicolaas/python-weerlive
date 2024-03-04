@@ -1,4 +1,5 @@
 """Basic tests for Weerlive."""
+
 # pylint: disable=protected-access
 import asyncio
 from unittest.mock import patch
@@ -119,9 +120,12 @@ async def test_client_error() -> None:
             latitude=26.0317749,
             session=session,
         )
-        with patch.object(
-            session,
-            "request",
-            side_effect=ClientError,
-        ), pytest.raises(WeerliveConnectionError):
+        with (
+            patch.object(
+                session,
+                "request",
+                side_effect=ClientError,
+            ),
+            pytest.raises(WeerliveConnectionError),
+        ):
             assert await client._request("test")
