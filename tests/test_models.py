@@ -2,18 +2,21 @@
 
 from __future__ import annotations
 
-from aiohttp import ClientSession
+from typing import TYPE_CHECKING
+
 from aresponses import ResponsesMockServer
 from syrupy.assertion import SnapshotAssertion
 
-from weerlive import Weather, Weerlive
-
 from . import load_fixtures
+
+if TYPE_CHECKING:
+    from weerlive import Weather, Weerlive
 
 
 async def test_weather_data(
     aresponses: ResponsesMockServer,
     snapshot: SnapshotAssertion,
+    weerlive_client: Weerlive,
 ) -> None:
     """Test weather data function."""
     aresponses.add(
@@ -26,23 +29,18 @@ async def test_weather_data(
             text=load_fixtures("weather.json"),
         ),
     )
-    async with ClientSession() as session:
-        client = Weerlive(
-            api_key="test",
-            longitude=66.6699498,
-            latitude=26.0317749,
-            session=session,
-        )
-        weather: Weather = await client.weather()
-        assert weather == snapshot
-        assert weather.to_json() == snapshot
-        assert weather.alarm is False
-        assert weather.alarm_message is None
+    weather: Weather = await weerlive_client.weather()
+    assert weather == snapshot
+
+    assert weather.to_json() == snapshot
+    assert weather.alarm is False
+    assert weather.alarm_message is None
 
 
 async def test_weather_alarm_data(
     aresponses: ResponsesMockServer,
     snapshot: SnapshotAssertion,
+    weerlive_client: Weerlive,
 ) -> None:
     """Test weather data function."""
     aresponses.add(
@@ -55,14 +53,7 @@ async def test_weather_alarm_data(
             text=load_fixtures("weather_alarm.json"),
         ),
     )
-    async with ClientSession() as session:
-        client = Weerlive(
-            api_key="test",
-            longitude=66.6699498,
-            latitude=26.0317749,
-            session=session,
-        )
-        weather: Weather = await client.weather()
-        assert weather == snapshot
-        assert weather.to_json() == snapshot
-        assert weather.alarm is True
+    weather: Weather = await weerlive_client.weather()
+    assert weather == snapshot
+    assert weather.to_json() == snapshot
+    assert weather.alarm is True

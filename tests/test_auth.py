@@ -34,7 +34,9 @@ async def test_missing_api_key(aresponses: ResponsesMockServer) -> None:
             await client.weather()
 
 
-async def test_invalid_api_key(aresponses: ResponsesMockServer) -> None:
+async def test_invalid_api_key(
+    aresponses: ResponsesMockServer, weerlive_client: Weerlive
+) -> None:
     """Test invalid API key."""
     aresponses.add(
         "weerlive.nl",
@@ -46,18 +48,13 @@ async def test_invalid_api_key(aresponses: ResponsesMockServer) -> None:
             text=load_fixtures("error_auth.txt"),
         ),
     )
-    async with ClientSession() as session:
-        client = Weerlive(
-            api_key="invalid",
-            longitude=66.6699498,
-            latitude=26.0317749,
-            session=session,
-        )
-        with pytest.raises(WeerliveAuthenticationError):
-            await client.weather()
+    with pytest.raises(WeerliveAuthenticationError):
+        await weerlive_client.weather()
 
 
-async def test_rate_limit(aresponses: ResponsesMockServer) -> None:
+async def test_rate_limit(
+    aresponses: ResponsesMockServer, weerlive_client: Weerlive
+) -> None:
     """Test rate limit."""
     aresponses.add(
         "weerlive.nl",
@@ -69,12 +66,5 @@ async def test_rate_limit(aresponses: ResponsesMockServer) -> None:
             text=load_fixtures("error_rate_limit.txt"),
         ),
     )
-    async with ClientSession() as session:
-        client = Weerlive(
-            api_key="test",
-            longitude=66.6699498,
-            latitude=26.0317749,
-            session=session,
-        )
-        with pytest.raises(WeerliveRateLimitError):
-            await client.weather()
+    with pytest.raises(WeerliveRateLimitError):
+        await weerlive_client.weather()
