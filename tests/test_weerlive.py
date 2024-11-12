@@ -14,7 +14,9 @@ from weerlive.exceptions import WeerliveConnectionError, WeerliveError
 from . import load_fixtures
 
 
-async def test_json_request(aresponses: ResponsesMockServer) -> None:
+async def test_json_request(
+    aresponses: ResponsesMockServer, weerlive_client: Weerlive
+) -> None:
     """Test JSON response is handled correctly."""
     aresponses.add(
         "weerlive.nl",
@@ -26,16 +28,8 @@ async def test_json_request(aresponses: ResponsesMockServer) -> None:
             text=load_fixtures("weather.json"),
         ),
     )
-    async with ClientSession() as session:
-        client = Weerlive(
-            api_key="test",
-            longitude=66.6699498,
-            latitude=26.0317749,
-            session=session,
-        )
-        response = await client._request("test")
-        assert response is not None
-        await client.close()
+    await weerlive_client._request("test")
+    await weerlive_client.close()
 
 
 async def test_internal_session(aresponses: ResponsesMockServer) -> None:
@@ -88,7 +82,9 @@ async def test_timeout(aresponses: ResponsesMockServer) -> None:
             await client._request("test")
 
 
-async def test_content_type(aresponses: ResponsesMockServer) -> None:
+async def test_content_type(
+    aresponses: ResponsesMockServer, weerlive_client: Weerlive
+) -> None:
     """Test content type is handled correctly."""
     aresponses.add(
         "weerlive.nl",
@@ -100,15 +96,8 @@ async def test_content_type(aresponses: ResponsesMockServer) -> None:
             text=load_fixtures("weather.json"),
         ),
     )
-    async with ClientSession() as session:
-        client = Weerlive(
-            api_key="test",
-            longitude=66.6699498,
-            latitude=26.0317749,
-            session=session,
-        )
-        with pytest.raises(WeerliveError):
-            assert await client._request("test")
+    with pytest.raises(WeerliveError):
+        await weerlive_client._request("test")
 
 
 async def test_client_error() -> None:
