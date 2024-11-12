@@ -20,6 +20,8 @@ from .exceptions import (
 )
 from .models import Weather
 
+VERSION = metadata.version(__package__)
+
 
 @dataclass
 class Weerlive:
@@ -61,12 +63,11 @@ class Weerlive:
             WeerliveError: Received an unexpected response from the Weerlive API.
 
         """
-        version = metadata.version(__package__)
         url = URL.build(scheme="https", host="weerlive.nl", path="/api/").join(URL(uri))
 
         headers = {
             "Accept": "application/json",
-            "User-Agent": f"PythonWeerlive/{version}",
+            "User-Agent": f"PythonWeerlive/{VERSION}",
         }
 
         if self.session is None:
