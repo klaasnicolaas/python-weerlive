@@ -6,7 +6,7 @@ import asyncio
 import socket
 from dataclasses import dataclass
 from importlib import metadata
-from typing import Any, Self, cast
+from typing import Any, Self
 
 from aiohttp import ClientError, ClientSession
 from aiohttp.hdrs import METH_GET
@@ -113,7 +113,7 @@ class Weerlive:
                 {"Content-Type": content_type, "response": response_text},
             )
 
-        return cast(dict[str, Any], await response.json())
+        return await response.json()
 
     async def weather(self) -> Weather:
         """Get the current weather forecast.
