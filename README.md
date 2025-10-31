@@ -89,7 +89,7 @@ You need at least:
 
 - Python 3.11+
 - [Poetry][poetry-install]
-
+3.12
 ### Installation
 
 Install all packages, including all development requirements:
