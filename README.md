@@ -16,6 +16,7 @@
 [![Build Status][build-shield]][build-url]
 [![Typing Status][typing-shield]][typing-url]
 [![Code Coverage][codecov-shield]][codecov-url]
+[![OpenSSF Scorecard][scorecard-shield]][scorecard-url]
 
 Asynchronous Python client for Weerlive API.
 
@@ -134,7 +135,7 @@ poetry run pytest --snapshot-update
 
 MIT License
 
-Copyright (c) 2023-2025 Klaas Schoute
+Copyright (c) 2023-2026 Klaas Schoute
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -172,7 +173,7 @@ SOFTWARE.
 [downloads-url]: https://pypistats.org/packages/weerlive
 [last-commit-shield]: https://img.shields.io/github/last-commit/klaasnicolaas/python-weerlive.svg
 [license-shield]: https://img.shields.io/github/license/klaasnicolaas/python-weerlive.svg
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
 [pypi]: https://pypi.org/project/weerlive/
 [python-versions-shield]: https://img.shields.io/pypi/pyversions/weerlive
@@ -184,3 +185,5 @@ SOFTWARE.
 [poetry-install]: https://python-poetry.org/docs/#installation
 [poetry]: https://python-poetry.org
 [prek]: https://github.com/j178/prek
+[scorecard-shield]: https://api.scorecard.dev/projects/github.com/klaasnicolaas/python-weerlive/badge
+[scorecard-url]: https://scorecard.dev/viewer/?uri=github.com/klaasnicolaas/python-weerlive

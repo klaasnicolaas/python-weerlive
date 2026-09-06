@@ -20,7 +20,7 @@ from .exceptions import (
 )
 from .models import Weather
 
-VERSION = metadata.version(__package__)
+VERSION = metadata.version("weerlive")
 
 
 @dataclass

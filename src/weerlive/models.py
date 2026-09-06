@@ -36,7 +36,6 @@ class TimeStrategy(SerializationStrategy):
 
 
 @dataclass
-# pylint: disable-next=too-many-instance-attributes
 class Weather(DataClassORJSONMixin):
     """Object representing an Weather model.
 
@@ -107,7 +106,6 @@ class Weather(DataClassORJSONMixin):
         if self.alarm_message == "":
             self.alarm_message = None
 
-    # pylint: disable-next=too-few-public-methods
     class Config(BaseConfig):
         """Mashumaro configuration."""
 
