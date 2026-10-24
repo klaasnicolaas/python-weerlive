@@ -9,7 +9,7 @@ from weerlive import Weerlive
 
 
 @pytest.fixture(name="weerlive_client")
-async def client() -> AsyncGenerator[Weerlive, None]:
+async def client() -> AsyncGenerator[Weerlive]:
     """Return an Weerlive client."""
     async with (
         ClientSession() as session,
